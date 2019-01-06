@@ -4,6 +4,7 @@
 - [+] input : the data you want to search :
 - [+] input : username :
 - [+] input : password :
+
 默认查询10页，即100个ip
 若需要修改页数，请在第91行修改
 然后会将100个ip给保存在`ip_list.txt`文件下
