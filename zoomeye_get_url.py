@@ -87,6 +87,7 @@ def apiTest():
             else:
                 print( '[+] info : ' + str(e.message))
         else:
+        	# 修改查询的页数
             if page == 10:
                 break
             page += 1
